@@ -26,3 +26,10 @@ export function getTimeOfDay() {
   export function isArrayEmpty(list) {
     return list.length === 0
   }
+
+  export const getTaskId = () => {
+    let randomNum = Math.floor(Math.random() * 99999) - 100
+    var milliseconds = new Date().getTime();
+    var taskId = "TASK" + "-" + milliseconds + "-" + randomNum;
+    return taskId;
+}

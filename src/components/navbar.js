@@ -13,7 +13,7 @@ const Header = () => {
     };
     const { theme, setTheme } = useTheme();
     return (
-        <Navbar bg={theme} variant={theme} expand="lg" style={{'borderBottom' : '1px solid #e1e1e1'}}>
+        <Navbar bg={theme} variant={theme} expand="lg" style={{'borderBottom' : theme === 'light' ? '1px solid #e1e1e1' : '1px solid #212529'}}>
             <Container >
                 <Navbar.Brand href="#home">Good {getTimeOfDay()}, Vishal</Navbar.Brand>
                 <Navbar.Toggle />

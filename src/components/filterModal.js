@@ -1,49 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
-import { useDispatch, useSelector } from "react-redux";
-import { setTasks } from "../store/reduxActions";
 import { getTaskId, isEmpty, isUndefined } from "../utils/util";
 
-const CustomModal = ({ show, title, message, handleModalState, onSubmit , data}) => {
+const FilterModal = ({ show, handleModalState, onSubmit}) => {
 
-    const [taskName, setTaskName] = useState(!isUndefined(data) ? data.taskName : '')
-    const [taskStatus, setTaskStatus] = useState(!isUndefined(data) ? data.taskStatus : '')
-
-    useEffect(()=>{
-        if(!isUndefined(data)){
-            setTaskName(data.taskName)
-        }
-    },[])
+    const [taskStatus, setTaskStatus] = useState('')
 
     const onTaskStatusSelection = (e) => {
         setTaskStatus(e.target.value)
     }
 
-    const onTaskNameChange = (e) => {
-        setTaskName(e.target.value)
-    }
-
     function onTaskSubmit (){
-        if(!isEmpty(taskName) && !isEmpty(taskStatus) && taskStatus !== "-1"){
-            let taskDetails = {taskId : !isUndefined(data) ? data.taskId : getTaskId(),taskName: taskName, taskStatus: taskStatus , createdDate : new Date()}
-            onSubmit(taskDetails)
+        if(!isEmpty(taskStatus) && taskStatus !== "-1"){
+            onSubmit(taskStatus)
             handleModalState()
-        }else{
-            alert('Please fill all the details to add the task')
         }
+    }
+    function onClearFilters (){
+        setTaskStatus('')
+        onSubmit('')
+        handleModalState()
     }
 
     return (
         <>
             <Modal show={show} onHide={handleModalState}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{title}</Modal.Title>
+                    <Modal.Title>Filter Tasks by Status</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Control type="text" placeholder="Enter Task Name" className="mb-3" aria-label="Search" value={taskName} onChange={onTaskNameChange} />
                             <Form.Select onChange={onTaskStatusSelection} value={taskStatus}>
                                 <option value="-1">Select Task Status</option>
                                 <option value="0">To-do</option>
@@ -61,10 +49,13 @@ const CustomModal = ({ show, title, message, handleModalState, onSubmit , data})
                     <Button variant="primary" onClick={()=>onTaskSubmit()}>
                         Save Changes
                     </Button>
+                    <Button variant="warning" onClick={()=>onClearFilters()}>
+                        Clear Filters
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>
     );
 }
 
-export default CustomModal;
+export default FilterModal;

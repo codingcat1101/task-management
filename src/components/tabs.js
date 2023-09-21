@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, ButtonGroup, ButtonToolbar, Col, Container, Row } from "react-bootstrap";
-import { MdCheck, MdPending, MdList , MdArchive } from "react-icons/md";
+import { MdLibraryAddCheck, MdPending, MdList , MdArchive } from "react-icons/md";
 
 const StatusTabs = () => {
     const statusMenu = [
         {
             id: 1,
-            name: 'To-Do',
+            name: 'Todo',
             icon: <MdList size={25} />
         },
         {
@@ -16,8 +16,8 @@ const StatusTabs = () => {
         },
         {
             id: 2,
-            name: 'Completed',
-            icon: <MdCheck size={25} />
+            name: 'Done',
+            icon: <MdLibraryAddCheck size={25} />
         },
         {
             id: 3,
