@@ -71,6 +71,7 @@ const Home = () => {
         tasks.forEach(task => {
             if (task.taskId === selectedTask.taskId) {
                 task.taskName = selectedTask.taskName
+                task.taskNote = selectedTask.taskNote
                 task.createdDate = selectedTask.createdDate
                 task.taskStatus = selectedTask.taskStatus
             }
@@ -94,9 +95,7 @@ const Home = () => {
         if (value === '' || value === undefined || value === null) {
             setFilteredTasks(taskItems);
         } else {
-            const filteredData = taskItems.filter(item =>
-                item.taskName.toLowerCase().includes(value.toLowerCase())
-            );
+            const filteredData = taskItems.filter(item =>item.taskName.toLowerCase().includes(value.toLowerCase()))
             setFilteredTasks(filteredData);
         }
     }
@@ -121,10 +120,10 @@ const Home = () => {
                 <Col xs={8}>
                     <SearchComponent onTextSearch={onSearch} />
                 </Col>
-                <Col xs={4} align="end" className='align-self-center'>
-                    <MdAddCircle size={35} onClick={() => onActionClicked(1)} color={themeSwitcherVariantForButtons[theme]}/>
-                    <MdFilterListAlt size={35} onClick={toggleFilterModal} color={themeSwitcherVariantForButtons[theme]}/>
-                    <MdOutlineLayersClear size={35} onClick={() => onTasksCleared()} color={themeSwitcherVariantForButtons[theme]}/>
+                <Col xs={4} align="end"  className='mt-2 align-self-center'>
+                    <MdAddCircle size={30}  onClick={() => onActionClicked(1)} color={themeSwitcherVariantForButtons[theme]}/>
+                    <MdFilterListAlt size={30} onClick={toggleFilterModal} color={themeSwitcherVariantForButtons[theme]}/>
+                    <MdOutlineLayersClear size={30} onClick={() => onTasksCleared()} color={themeSwitcherVariantForButtons[theme]}/>
                 </Col>
             </Row>
             {/* <StatusTabs /> */}

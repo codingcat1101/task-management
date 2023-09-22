@@ -12,6 +12,7 @@ const TaskCard = ({ data, isTaskEmpty, onTaskDelete , onTaskUpdate , setSelected
     let title = !isUndefined(data) ? data.taskName : ''
     let statusMessage = !isUndefined(data) ? parseInt(data.taskStatus) : 0
     let status = !isUndefined(data) ? data.status : ''
+    let taskNote = !isUndefined(data) && !isUndefined(data.taskNote) ? data.taskNote : ''
 
     const themeSwitcherVariant = {
         light: "black",
@@ -59,10 +60,9 @@ const TaskCard = ({ data, isTaskEmpty, onTaskDelete , onTaskUpdate , setSelected
                                     </Col>
                                 </Row>
                             </Card.Title>
-                            {/* <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                            </Card.Text> */}
+                            <Card.Text style={{color: themeSwitcherVariant[theme]}}>
+                                {taskNote}
+                            </Card.Text>
                             {
                                 !isEmpty(statusMessage) &&
                                 <Row className="mt-4">

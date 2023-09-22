@@ -9,6 +9,7 @@ const CustomModal = ({ show, title, message, handleModalState, onSubmit , data})
 
     const [taskName, setTaskName] = useState(!isUndefined(data) ? data.taskName : '')
     const [taskStatus, setTaskStatus] = useState(!isUndefined(data) ? data.taskStatus : '')
+    const [taskNote, setTaskNote] = useState(!isUndefined(data) ? data.taskNote : '')
 
     useEffect(()=>{
         if(!isUndefined(data)){
@@ -24,9 +25,19 @@ const CustomModal = ({ show, title, message, handleModalState, onSubmit , data})
         setTaskName(e.target.value)
     }
 
+    const onTaskNoteChange = (e) => {
+        setTaskNote(e.target.value)
+    }
+
     function onTaskSubmit (){
         if(!isEmpty(taskName) && !isEmpty(taskStatus) && taskStatus !== "-1"){
-            let taskDetails = {taskId : !isUndefined(data) ? data.taskId : getTaskId(),taskName: taskName, taskStatus: taskStatus , createdDate : new Date()}
+            let taskDetails = {
+                taskId : !isUndefined(data) ? data.taskId : getTaskId(),
+                taskName: taskName,
+                taskStatus: taskStatus,
+                taskNote : taskNote, 
+                createdDate : new Date()
+            }
             onSubmit(taskDetails)
             handleModalState()
         }else{
@@ -44,6 +55,7 @@ const CustomModal = ({ show, title, message, handleModalState, onSubmit , data})
                     <Form>
                         <Form.Group>
                             <Form.Control type="text" placeholder="Enter Task Name" className="mb-3" aria-label="Search" value={taskName} onChange={onTaskNameChange} />
+                            <Form.Control type="text" as='textarea' placeholder="Notes" className="mb-3" value={taskNote} onChange={onTaskNoteChange} />
                             <Form.Select onChange={onTaskStatusSelection} value={taskStatus}>
                                 <option value="-1">Select Task Status</option>
                                 <option value="0">To-do</option>

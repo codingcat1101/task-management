@@ -16,15 +16,14 @@ const Header = () => {
         <Navbar bg={theme} variant={theme} expand="lg" style={{'borderBottom' : theme === 'light' ? '1px solid #e1e1e1' : '1px solid #212529'}}>
             <Container >
                 <Navbar.Brand href="#home">Good {getTimeOfDay()}, Vishal</Navbar.Brand>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end">
+                <div className="justify-content-end">
                     {
                         theme === 'light' ?
                             <MdDarkMode style={{ 'color': theme === 'light' ? 'black' : 'white' }} size={30} variant={theme !== undefined && themeSwitcherVariant[theme]} onClick={() => setTheme(theme)} />
                             :
                             <MdLightMode style={{ 'color': theme === 'light' ? 'black' : 'white' }} size={30} variant={theme !== undefined && themeSwitcherVariant[theme]} onClick={() => setTheme(theme)} />
                     }
-                </Navbar.Collapse>
+                </div>
             </Container>
         </Navbar>
     );
